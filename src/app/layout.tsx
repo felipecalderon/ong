@@ -4,6 +4,7 @@ import './globals.css'
 import AuthProvider from '@/providers/auth'
 import Navbar from '@/components/nav/navbar'
 import { Toaster } from 'sonner'
+import CatAnimated from '@/components/cats/cat-animated'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -26,12 +27,13 @@ export default function RootLayout({
     children: React.ReactNode
 }>) {
     return (
-        <html lang='en'>
+        <html lang='es'>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <AuthProvider>
                     <Toaster />
                     <Navbar />
                     {children}
+                    <CatAnimated />
                 </AuthProvider>
             </body>
         </html>

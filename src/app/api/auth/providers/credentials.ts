@@ -22,6 +22,6 @@ export default CredentialsProvider({
         }
 
         // 3. Retornar el usuario autenticado
-        return { id: user.id, name: user.name, email: user.email }
+        return { id: user._id, name: user.name, email: user.email, image: user.image }
     },
 })

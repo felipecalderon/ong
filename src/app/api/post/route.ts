@@ -1,15 +1,11 @@
 import { savePost } from '@/actions/post.action'
+import { Post } from '@/interfaces/post.interface'
 import { NextRequest, NextResponse } from 'next/server'
-
-interface Post {
-    id: string
-    text: string
-}
 
 export const POST = async (req: NextRequest) => {
     try {
-        const { id, text }: Post = await req.json()
-        await savePost(id, text)
+        const post: Post = await req.json()
+        await savePost(post)
         return NextResponse.json({ success: true })
     } catch (error) {
         if (error instanceof Error) {

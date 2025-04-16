@@ -1,19 +1,25 @@
-import { redisClient } from '@/database/redis'
+import { UserModel } from '@/database/models/user.model'
+import { connectToMongoDB } from '@/database/mongo'
 import { User } from '@/interfaces/user.interface'
 import { hash } from 'bcryptjs'
 
 const KEY_PREFIX = 'user:'
 
-export async function saveUser(user: User) {
-    const key = `${KEY_PREFIX}${user.email}`
-    user.password = await hash(user.password, 10)
-    return await redisClient.set(key, JSON.stringify(user)) // No expira
+export async function saveUser(user: Omit<User, '_id'>) {
+    await connectToMongoDB()
+    console.log(user)
+    const hashPassword = await hash(user.password, 12)
+    const newUser = new UserModel({
+        email: user.email,
+        name: user.name,
+        password: hashPassword,
+        image: user.image,
+    })
+    return await newUser.save()
 }
 
 export async function getUser(email?: string): Promise<User | null> {
+    await connectToMongoDB()
     if (!email) return null
-    const key = `${KEY_PREFIX}${email}`
-    const userStr = await redisClient.get(key)
-    if (!userStr) return null
-    return JSON.parse(userStr)
+    return await UserModel.findOne({ email })
 }
