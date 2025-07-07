@@ -1,21 +1,25 @@
+'use server'
 import { UserModel } from '@/database/models/user.model'
 import { connectToMongoDB } from '@/database/mongo'
 import { User } from '@/interfaces/user.interface'
 import { hash } from 'bcryptjs'
 
-const KEY_PREFIX = 'user:'
-
-export async function saveUser(user: Omit<User, '_id'>) {
+export async function registerUser(user: Omit<User, '_id'>) {
     await connectToMongoDB()
-    console.log(user)
-    const hashPassword = await hash(user.password, 12)
+    const existingUser = await UserModel.findOne({ email: user.email })
+    if (existingUser) {
+        throw new Error('El correo electrónico ya está en uso.')
+    }
+
+    const hashedPassword = await hash(user.password, 12)
     const newUser = new UserModel({
-        email: user.email,
-        name: user.name,
-        password: hashPassword,
-        image: user.image,
+        ...user,
+        password: hashedPassword,
     })
-    return await newUser.save()
+
+    const newUserDB = await newUser.save()
+    const jsonUser = newUserDB.toObject()
+    return jsonUser
 }
 
 export async function getUser(email?: string): Promise<User | null> {

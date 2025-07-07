@@ -1,5 +1,5 @@
 import { Post } from '@/interfaces/post.interface'
-import mongoose from 'mongoose'
+import mongoose, { Model } from 'mongoose'
 
 export const PostSchema = new mongoose.Schema({
     _id: {
@@ -20,12 +20,4 @@ export const PostSchema = new mongoose.Schema({
     },
 })
 
-let PostModel: mongoose.Model<Post>
-
-if (!mongoose.models['Post']) {
-    PostModel = mongoose.model('Post', PostSchema)
-} else {
-    PostModel = mongoose.models['Post']
-}
-
-export { PostModel }
+export const PostModel: Model<Post> = mongoose.models?.Post ?? mongoose.model<Post>('Post', PostSchema)

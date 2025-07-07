@@ -1,10 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useParams, useRouter, useSearchParams } from 'next/navigation'
-import { User } from '@/interfaces/user.interface'
+import { useEffect, useState, useTransition } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { registerUser } from '@/actions/user.action' // Importamos la Server Action
 
 export default function RegisterPage() {
+    const [isPending, startTransition] = useTransition()
     const params = useSearchParams()
 
     const name = params.get('name')
@@ -25,18 +26,13 @@ export default function RegisterPage() {
         e.preventDefault()
         setError('')
         console.log({ user })
-        const res = await fetch('/api/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(user),
-        })
-
-        if (!res.ok) {
-            setError('Hubo un error al registrarte')
-        } else {
-            router.push('/login') // Redirigir tras registro exitoso
+        try {
+            startTransition(async () => {
+                await registerUser(user) // Llamada directa a la Server Action
+                router.push('/login') // Redirigir tras registro exitoso
+            })
+        } catch (err: any) {
+            setError(err.message || 'Hubo un error al registrarte')
         }
     }
 

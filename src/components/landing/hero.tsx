@@ -1,10 +1,10 @@
 'use client'
 import React from 'react'
-import { HeroParallax } from './ui/hero-parallax'
-import { Modal, ModalBody, ModalClose, ModalContent, ModalFooter, ModalHeader, ModalTitle, ModalTrigger } from '@/components/credenza'
+import { HeroParallax } from '../ui/hero-parallax'
+import { Modal, ModalBody, ModalClose, ModalContent, ModalFooter, ModalHeader, ModalTitle, ModalTrigger } from '@/components/common/credenza'
 import MarkdownEditor from '@/components/md-editor/editor'
 import { useSession } from 'next-auth/react'
-import AuthButton from './auth/button'
+import AuthButton from '../auth/button'
 
 export function HeroParallaxDemo() {
     const { status } = useSession()

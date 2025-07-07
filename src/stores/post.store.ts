@@ -1,3 +1,4 @@
+import { savePost as savePostAction } from '@/actions/post.action'
 import { Post } from '@/interfaces/post.interface'
 import { create } from 'zustand'
 
@@ -20,13 +21,7 @@ export const usePostStore = create<PostStore>((set, get) => ({
         try {
             set({ loading: true })
             const { post } = get()
-            await fetch('/api/post', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(post),
-            })
+            await savePostAction(post)
             console.log('Contenido guardado:', post)
         } catch (error) {
             console.error('Error al guardar post:', error)

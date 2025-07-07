@@ -22,12 +22,4 @@ export const UserSchema = new mongoose.Schema({
     },
 })
 
-let UserModel: Model<Omit<User, '_id'>>
-
-if (!mongoose.models['User']) {
-    UserModel = mongoose.model('User', UserSchema)
-} else {
-    UserModel = mongoose.models['User']
-}
-
-export { UserModel }
+export const UserModel: Model<Omit<User, '_id'>> = mongoose.models?.User ?? mongoose.model<User>('User', UserSchema)

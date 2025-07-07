@@ -1,4 +1,4 @@
-import { HeroParallaxDemo } from '@/components/hero'
+import { HeroParallaxDemo } from '@/components/landing/hero'
 
 export default async function Home() {
     // await sleep(5000)

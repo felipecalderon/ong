@@ -1,4 +1,4 @@
-import LoadingCat from '@/components/cats/loading-cat'
+import LoadingCat from '@/components/common/loading-cat'
 
 export default function Loading() {
     return (
