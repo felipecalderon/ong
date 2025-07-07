@@ -2,18 +2,21 @@
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Toolbar from '@/components/md-editor/toolbar'
-import { useSession } from 'next-auth/react'
 import { usePostStore } from '@/stores/post.store'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
 
 export default function Editor() {
-    const { data: session } = useSession()
     const { setPost, post, savePost, loading } = usePostStore()
+    // const [isClicked, setClicked] = useState(false)
+
+    // const changeClicked = () => {
+    //     setClicked(() => !isClicked)
+    //     console.log(isClicked)
+    // }
 
     const editor = useEditor({
         extensions: [StarterKit],
-        content: '<p>Escribe aquí tu publicación...</p>',
         onUpdate: (props) => {
             const html = props.editor.getHTML()
             setPost({
@@ -25,33 +28,27 @@ export default function Editor() {
         shouldRerenderOnTransaction: false,
     })
 
-    useEffect(() => {
-        if (session) {
-            setPost({
-                ...post,
-                user: session.user?.email || '',
-            })
-        }
-    }, [session])
-    if (!session) return null
     return (
         <div className='max-w-lg shadow-2xl p-4'>
             <div className='flex items-center gap-2'>
                 <Input
                     type='text'
                     id='title'
-                    placeholder='Agregar un título'
+                    placeholder='Motivo de la Denuncia'
                     value={post.title}
                     onChange={(e) => setPost({ ...post, title: e.target.value })}
-                    className='mt-2'
+                    className='my-2'
                 />
             </div>
             <Toolbar editor={editor} />
-            <EditorContent editor={editor} />
+            <p className='italic text-slate-500 cursor-default text-sm'>
+                Redacta aquí debajo tu denuncia con la mayor cantidad de detalles posibles:
+            </p>
+            <EditorContent editor={editor} onClick={() => console.log(true)} placeholder='asdasdas' />
             <button className='bkn' onClick={() => savePost()}>
-                <span aria-hidden='true'>Guardar</span>
+                <span aria-hidden='true'>Enviar</span>
                 <span></span>
-                {loading ? <span>Guardando...</span> : <span>Guardar</span>}
+                {loading ? <span>Enviando...</span> : <span>Enviar</span>}
             </button>
         </div>
     )

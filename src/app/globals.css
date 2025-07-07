@@ -25,8 +25,8 @@
         @apply border-border outline-ring/50;
     }
     body {
-        @apply bg-background text-foreground;
-        @apply text-slate-900;
+        @apply bg-background;
+        @apply text-slate-800;
     }
     :root {
         --bg-color-1: #171717;
@@ -279,26 +279,21 @@ button.bkn span {
     place-items: center;
     transition: 0.2s ease;
     border: 2px solid black;
-    /*   transform:
-    translate(
-      calc((var(--active) * var(--coefficient, 0)) * (var(--step) * -1)),
-      calc((var(--active) * var(--coefficient, 0)) * (var(--step) * -1))
-    ); */
     translate: calc((var(--active) * var(--coefficient, 0)) * (var(--step) * -1)) calc((var(--active) * var(--coefficient, 0)) * (var(--step) * -1));
 }
 
 span:nth-of-type(1) {
-    --bg: var(--bg-color-3);
+    --bg: var(--color-rose-300);
 }
 
 span:nth-of-type(2) {
     --coefficient: 1;
-    --bg: var(--bg-color-2);
+    --bg: var(--color-amber-300);
 }
 
 span:nth-of-type(3) {
     --coefficient: 2;
-    --bg: var(--bg-color-1);
+    --bg: var(--color-slate-800);
 }
 
 button.bkn:active {

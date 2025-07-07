@@ -82,7 +82,7 @@ export default function LoginPage() {
                     <button
                         type='button'
                         onClick={() => signIn('google', { callbackUrl: '/' })}
-                        className='flex items-center justify-center w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition'>
+                        className='flex items-center justify-center w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition cursor-pointer'>
                         <Google className='mr-2 bg-white rounded-full scale-110 p-1' size={20} />
                         Iniciar sesión con Google
                     </button>
