@@ -5,6 +5,8 @@ import AuthProvider from '@/providers/auth'
 import Navbar from '@/components/layout/navbar'
 import { Toaster } from 'sonner'
 import CatAnimated from '@/components/common/cat-animated'
+import AuthButton from '@/components/auth/button'
+import Dog from '@/components/common/dog/dog-animated'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -26,14 +28,27 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode
 }>) {
+    const navItems = [
+        {
+            name: 'Nosotros',
+            link: '#about-us',
+        },
+        {
+            name: 'Contacto',
+            link: '#contact',
+        },
+    ]
     return (
         <html lang='es'>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <AuthProvider>
                     <Toaster />
-                    <Navbar />
+                    <Navbar navItems={navItems}>
+                        <AuthButton />
+                    </Navbar>
                     {children}
                     <CatAnimated />
+                    <Dog />
                 </AuthProvider>
             </body>
         </html>

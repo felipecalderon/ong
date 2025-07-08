@@ -1,50 +1,20 @@
 'use client'
 import React from 'react'
 import { HeroParallax } from '../ui/hero-parallax'
-import { Modal, ModalBody, ModalClose, ModalContent, ModalFooter, ModalHeader, ModalTitle, ModalTrigger } from '@/components/common/credenza'
-import MarkdownEditor from '@/components/md-editor/editor'
-import { useSession } from 'next-auth/react'
-import AuthButton from '../auth/button'
+import ReportButton from '../ui/report-button'
 
 export function HeroParallaxDemo() {
-    const { status } = useSession()
     return (
         <HeroParallax images={images}>
             <div className='absolute w-full left-0 top-40 z-50 flex flex-col items-center justify-center gap-10'>
-                <h1 className='text-2xl md:text-7xl font-bold text-center'>
+                <h1 className='text-3xl md:text-6xl font-bold text-center mb-6 bg-gradient-to-r from-amber-600 to-amber-700 text-transparent bg-clip-text'>
                     Protegemos vidas, <br /> Defendemos Derechos
                 </h1>
-                <p className='max-w-2xl text-base md:text-xl text-center pb-3'>
+                <p className='max-w-sm md:max-w-2xl text-base md:text-xl text-center pb-3 text-balance'>
                     Buscamos promover, educar y defender los derechos de los animales en Chile mediante herramientas legales, formación ciudadana y
                     litigación estratégica, asegurando justicia y bienestar para todas las especies.
                 </p>
-                <Modal>
-                    <ModalTrigger asChild>
-                        <button className='bkn mx-auto'>
-                            <span aria-hidden='true'>DENUNCIAR</span>
-                            <span></span>
-                            <span>DENUNCIAR</span>
-                        </button>
-                    </ModalTrigger>
-                    <ModalContent>
-                        <ModalHeader>
-                            <ModalTitle className='pl-3'>Denunciar maltrato animal</ModalTitle>
-                        </ModalHeader>
-                        <ModalBody>
-                            <div className='flex flex-col items-center justify-center gap-4'>
-                                <p className='pl-3'>Haz tu denuncia relacionada con vulneraciones hacia los animales.</p>
-                                {status === 'unauthenticated' ? (
-                                    <>
-                                        <p className='text-red-500'>Debes iniciar sesión para poder denunciar.</p>
-                                        <AuthButton />
-                                    </>
-                                ) : (
-                                    <MarkdownEditor />
-                                )}
-                            </div>
-                        </ModalBody>
-                    </ModalContent>
-                </Modal>
+                <ReportButton />
             </div>
         </HeroParallax>
     )

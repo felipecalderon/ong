@@ -70,6 +70,157 @@
     }
 }
 
+/* Custom properties */
+:root {
+    /* colors */
+    --bg-color: #3f3456;
+    --main-color: #f79e38;
+    --prime-color: #e99036;
+    --white-color: #ffffff;
+    --black-color: #000000;
+    --red-color: #e64356;
+
+    /* z-index */
+    --z-index-dog: 0;
+    --z-index-body: 3;
+    --z-index-head: 4;
+    --z-index-tail: 2;
+    --z-index-legs: 2;
+    --z-index-cheast: 4;
+    --z-index-hair: 2;
+    --z-index-face: 6;
+    --z-index-mouth: 6;
+    --z-index-eyes: 6;
+    --z-index-years: 1;
+    --z-index-nose: 7;
+
+    /* animation */
+    --duration: 2s;
+    --total-steps: 20;
+    --interval: 200ms;
+    --easing: ease-out;
+}
+
+/* Global resets */
+/* :global(html),
+:global(body) {
+  background-repeat: no-repeat;
+  background-size: contain fill;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color);
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+} */
+
+/* Keyframes */
+@keyframes heart-beat {
+    0% {
+        transform: scale(0.75) rotate(35deg);
+        opacity: 1;
+    }
+    5%,
+    15%,
+    25% {
+        transform: scale(1) rotate(35deg);
+    }
+    10%,
+    20% {
+        transform: scale(0.75) rotate(35deg);
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(35deg) translateY(-10px) translateX(-10px);
+        opacity: 0;
+    }
+}
+
+@keyframes dog-head {
+    to {
+        transform: translateX(-3px) rotate(3deg);
+    }
+}
+
+@keyframes dog-tail {
+    from,
+    to {
+        transform: rotate(10deg);
+    }
+    50%,
+    60% {
+        transform: rotate(70deg) translateX(10px) translateY(2px);
+    }
+}
+
+@keyframes dog-tail-before {
+    from,
+    to {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(3px);
+    }
+}
+
+@keyframes dog-legs {
+    from {
+        transform: translateY(-1px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes dog-eye {
+    from,
+    to {
+        animation-timing-function: step-end;
+        opacity: 1;
+    }
+    50%,
+    55% {
+        animation-timing-function: step-start;
+        opacity: 0;
+    }
+}
+
+@keyframes left-year {
+    from {
+        transform: rotate(-26deg);
+    }
+    25% {
+        transform: rotate(-35deg);
+    }
+    50% {
+        transform: rotate(-26deg);
+    }
+    to {
+        transform: rotate(-40deg);
+    }
+}
+
+@keyframes right-year {
+    from {
+        transform: rotate(-331deg);
+    }
+    25% {
+        transform: rotate(-320deg);
+    }
+    50% {
+        transform: rotate(-331deg);
+    }
+    to {
+        transform: rotate(-320deg);
+    }
+}
+
 .editor-container {
     border-radius: 8px;
     overflow: hidden;

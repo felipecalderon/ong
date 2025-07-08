@@ -4,7 +4,7 @@ import { connectToMongoDB } from '@/database/mongo'
 import { User } from '@/interfaces/user.interface'
 import { hash } from 'bcryptjs'
 
-export async function registerUser(user: Omit<User, '_id'>) {
+export const registerUser = async (user: Omit<User, '_id'>) => {
     await connectToMongoDB()
     const existingUser = await UserModel.findOne({ email: user.email })
     if (existingUser) {
@@ -19,11 +19,13 @@ export async function registerUser(user: Omit<User, '_id'>) {
 
     const newUserDB = await newUser.save()
     const jsonUser = newUserDB.toObject()
-    return jsonUser
+    return jsonUser as Omit<User, '_id'>
 }
 
-export async function getUser(email?: string): Promise<User | null> {
+export const getUser = async (email?: string): Promise<User | null> => {
     await connectToMongoDB()
     if (!email) return null
-    return await UserModel.findOne({ email })
+    const findedUser = await UserModel.findOne({ email })
+    const jsonUser = findedUser?.toObject() ?? null
+    return jsonUser as User | null
 }

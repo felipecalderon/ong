@@ -1,5 +1,4 @@
 'use client'
-import AuthButton from '@/components/auth/button'
 import { useState } from 'react'
 import {
     MobileNav,
@@ -13,34 +12,23 @@ import {
     NavItems,
 } from '../ui/resizable-navbar'
 
-export default function MenuNavbar() {
-    const navItems = [
-        {
-            name: 'Features',
-            link: '#features',
-        },
-        {
-            name: 'Pricing',
-            link: '#pricing',
-        },
-        {
-            name: 'Contact',
-            link: '#contact',
-        },
-    ]
+interface MenuNavbarProps {
+    navItems: {
+        name: string
+        link: string
+    }[]
+    children: React.ReactNode
+}
+
+export default function MenuNavbar({ navItems, children }: MenuNavbarProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     return (
-        // <nav className='w-full scroll flex justify-between items-center p-4 shadow-sm'>
-        //     <h1 className='text-xl font-semibold'>Mi App</h1>
-        // </nav>
         <Navbar>
             {/* Desktop Navigation */}
             <NavBody>
                 <NavbarLogo />
                 <NavItems items={navItems} />
-                <div className='flex items-center gap-4 z-50'>
-                    <AuthButton />
-                </div>
+                <div className='flex items-center gap-4 z-50'>{children}</div>
             </NavBody>
 
             {/* Mobile Navigation */}
@@ -56,18 +44,11 @@ export default function MenuNavbar() {
                             key={`mobile-link-${idx}`}
                             href={item.link}
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className='relative text-neutral-600 dark:text-neutral-300'>
+                            className='relative text-neutral-600 dark:text-neutral-30a'>
                             <span className='block'>{item.name}</span>
                         </a>
                     ))}
-                    <div className='flex w-full flex-col gap-4'>
-                        <NavbarButton onClick={() => setIsMobileMenuOpen(false)} variant='primary' className='w-full'>
-                            Login
-                        </NavbarButton>
-                        <NavbarButton onClick={() => setIsMobileMenuOpen(false)} variant='primary' className='w-full'>
-                            Book a call
-                        </NavbarButton>
-                    </div>
+                    <div className='flex w-full flex-col gap-4'>{children}</div>
                 </MobileNavMenu>
             </MobileNav>
         </Navbar>

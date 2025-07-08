@@ -76,7 +76,7 @@ export const AnimalImage = ({ product, translate }: AnimalImageProps) => {
     return (
         <motion.div
             style={{ x: translate }}
-            whileHover={{ y: -20 }}
+            whileHover={{ scale: 1.05 }}
             className='group/product relative shrink-0 h-64 sm:h-72 md:h-80 lg:h-96 w-60 sm:w-72 md:w-80 lg:w-96'>
             <Image
                 src={product.thumbnail}
