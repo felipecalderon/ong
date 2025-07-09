@@ -27,8 +27,20 @@ const getAll = async () => {
     return posts
 }
 
+/**
+ * Obtiene un post por su ID.
+ * @param id - El ID del post.
+ * @returns El post encontrado o null.
+ */
+const getById = async (id: string) => {
+    await connectToMongoDB()
+    const post = await PostModel.findById(id)
+    return post
+}
+
 // Exportamos un objeto de servicio con todos los métodos
 export const postService = {
     create,
     getAll,
+    getById,
 }

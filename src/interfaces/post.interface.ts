@@ -3,4 +3,6 @@ export interface Post {
     title: string
     content: string
     user: string
+    createdAt: string
+    upadtedAt: string
 }

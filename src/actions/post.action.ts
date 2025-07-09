@@ -8,3 +8,7 @@ export async function savePost(post: Post) {
 export async function getPosts() {
     return await postService.getAll()
 }
+
+export async function getPost(id: string) {
+    return await postService.getById(id)
+}

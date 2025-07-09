@@ -1,7 +1,9 @@
-import NextAuth from 'next-auth'
+import NextAuth, { User } from 'next-auth'
+import { JWT } from 'next-auth/jwt'
 import CredentialsProvider from '@/app/api/auth/providers/credentials'
 import { Google } from '@/app/api/auth/providers/social'
-import { getUser, saveUser } from '@/actions/user.action'
+import { getUser } from '@/actions/user.action'
+
 const handler = NextAuth({
     providers: [CredentialsProvider, Google],
     pages: {
@@ -13,25 +15,57 @@ const handler = NextAuth({
         strategy: 'jwt',
     },
     callbacks: {
-        async signIn({ user, account, profile }) {
+        async signIn({ user, account }) {
             if (!account) return false
+
             if (account.provider === 'google') {
                 const dbUser = await getUser(user.email!)
-                if (dbUser) {
-                    return true
-                }
+                if (dbUser) return true // Si el usuario de Google ya existe, permite el inicio de sesión
+
+                // Si no, redirige a completar el registro
                 const params = new URLSearchParams({
-                    email: user.email ? user.email : '',
-                    name: user.name ? user.name : '',
-                    image: user.image ? user.image : '',
+                    email: user.email || '',
+                    name: user.name || '',
+                    image: user.image || '',
                 })
-                // Redirige a la ruta para completar el registro, pasando información relevante (como el email)
                 return `/register?${params.toString()}`
             }
-            return true
+
+            return true // Para el proveedor de credenciales, la validación ya se hizo
         },
+
+        async jwt({ token, user, trigger, session }) {
+            // 1. Manejar la actualización manual de la sesión
+            if (trigger === 'update' && session?.user) {
+                token.name = session.user.name
+                token.email = session.user.email
+                token.picture = session.user.image // Actualiza la imagen
+                return token
+            }
+
+            // 2. Al iniciar sesión, enriquecer el token con datos de la BD
+            if (user) {
+                const dbUser = await getUser(user.email!)
+                if (dbUser) {
+                    token.id = dbUser._id
+                    token.picture = dbUser.image
+                    token.name = dbUser.name
+                }
+            }
+
+            return token
+        },
+
+        async session({ session, token }) {
+            // 3. Pasar los datos enriquecidos del token a la sesión del cliente
+            if (token) {
+                session.user!.image = token.picture as string
+                session.user!.name = token.name as string
+            }
+            return session
+        },
+
         async redirect({ url, baseUrl }) {
-            // Se asegura de que la redirección sea segura
             return url.startsWith(baseUrl) ? url : baseUrl
         },
     },

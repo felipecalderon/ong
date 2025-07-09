@@ -7,6 +7,7 @@ import { Toaster } from 'sonner'
 import CatAnimated from '@/components/common/cat-animated'
 import AuthButton from '@/components/auth/button'
 import Dog from '@/components/common/dog/dog-animated'
+import { navItems } from '@/lib/nav-links'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -28,16 +29,6 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode
 }>) {
-    const navItems = [
-        {
-            name: 'Nosotros',
-            link: '#about-us',
-        },
-        {
-            name: 'Contacto',
-            link: '#contact',
-        },
-    ]
     return (
         <html lang='es'>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
@@ -48,7 +39,7 @@ export default function RootLayout({
                     </Navbar>
                     {children}
                     <CatAnimated />
-                    <Dog />
+                    {/* <Dog /> */}
                 </AuthProvider>
             </body>
         </html>

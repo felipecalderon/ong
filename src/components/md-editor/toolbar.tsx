@@ -1,82 +1,75 @@
 'use client'
 import { type Editor } from '@tiptap/react'
-
 import { Bold, Italic, Heading1, Heading2, List, ListOrdered, Quote, Undo, Redo, Code } from 'lucide-react'
 
-// Componente para la barra de herramientas
-export default function Toolbar({ editor }: { editor: Editor | null }) {
+// Define un tipo para los props para mayor claridad
+type ToolbarProps = {
+    editor: Editor | null
+}
+
+// Componente reutilizable para los botones de la barra de herramientas
+const ToolbarButton = ({ onClick, isActive, title, children }: {
+    onClick: () => void
+    isActive?: boolean
+    title: string
+    children: React.ReactNode
+}) => (
+    <button
+        type="button" // Evita que los botones envíen un formulario por defecto
+        onClick={onClick}
+        className={`p-2 rounded-lg transition-colors duration-200 ${isActive ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700'}`}
+        title={title}
+    >
+        {children}
+    </button>
+)
+
+export default function Toolbar({ editor }: ToolbarProps) {
     if (!editor) {
         return null
     }
 
     return (
-        <div className='toolbar'>
-            <button onClick={() => editor.chain().focus().toggleBold().run()} className={editor.isActive('bold') ? 'is-active' : ''} title='Negrita'>
+        <div className='flex flex-wrap items-center gap-2 p-2 border border-gray-200 dark:border-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800'>
+            <ToolbarButton onClick={() => editor.chain().focus().toggleBold().run()} isActive={editor.isActive('bold')} title='Negrita'>
                 <Bold size={18} />
-            </button>
-
-            <button
-                onClick={() => editor.chain().focus().toggleItalic().run()}
-                className={editor.isActive('italic') ? 'is-active' : ''}
-                title='Cursiva'>
+            </ToolbarButton>
+            <ToolbarButton onClick={() => editor.chain().focus().toggleItalic().run()} isActive={editor.isActive('italic')} title='Cursiva'>
                 <Italic size={18} />
-            </button>
+            </ToolbarButton>
+            
+            <div className='w-[1px] h-6 bg-gray-300 dark:bg-gray-600 mx-1'></div>
 
-            <div className='divider'></div>
-
-            <button
-                onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-                className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
-                title='Encabezado 1'>
+            <ToolbarButton onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} isActive={editor.isActive('heading', { level: 1 })} title='Encabezado 1'>
                 <Heading1 size={18} />
-            </button>
-
-            <button
-                onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-                className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
-                title='Encabezado 2'>
+            </ToolbarButton>
+            <ToolbarButton onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} isActive={editor.isActive('heading', { level: 2 })} title='Encabezado 2'>
                 <Heading2 size={18} />
-            </button>
+            </ToolbarButton>
 
-            <div className='divider'></div>
+            <div className='w-[1px] h-6 bg-gray-300 dark:bg-gray-600 mx-1'></div>
 
-            <button
-                onClick={() => editor.chain().focus().toggleBulletList().run()}
-                className={editor.isActive('bulletList') ? 'is-active' : ''}
-                title='Lista con viñetas'>
+            <ToolbarButton onClick={() => editor.chain().focus().toggleBulletList().run()} isActive={editor.isActive('bulletList')} title='Lista con viñetas'>
                 <List size={18} />
-            </button>
-
-            <button
-                onClick={() => editor.chain().focus().toggleOrderedList().run()}
-                className={editor.isActive('orderedList') ? 'is-active' : ''}
-                title='Lista numerada'>
+            </ToolbarButton>
+            <ToolbarButton onClick={() => editor.chain().focus().toggleOrderedList().run()} isActive={editor.isActive('orderedList')} title='Lista numerada'>
                 <ListOrdered size={18} />
-            </button>
-
-            <button
-                onClick={() => editor.chain().focus().toggleBlockquote().run()}
-                className={editor.isActive('blockquote') ? 'is-active' : ''}
-                title='Cita'>
+            </ToolbarButton>
+            <ToolbarButton onClick={() => editor.chain().focus().toggleBlockquote().run()} isActive={editor.isActive('blockquote')} title='Cita'>
                 <Quote size={18} />
-            </button>
-
-            <button
-                onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-                className={editor.isActive('codeBlock') ? 'is-active' : ''}
-                title='Bloque de código'>
+            </ToolbarButton>
+            <ToolbarButton onClick={() => editor.chain().focus().toggleCodeBlock().run()} isActive={editor.isActive('codeBlock')} title='Bloque de código'>
                 <Code size={18} />
-            </button>
+            </ToolbarButton>
 
-            <div className='divider'></div>
+            <div className='w-[1px] h-6 bg-gray-300 dark:bg-gray-600 mx-1'></div>
 
-            <button onClick={() => editor.chain().focus().undo().run()} disabled={!editor.can().undo()} title='Deshacer'>
+            <ToolbarButton onClick={() => editor.chain().focus().undo().run()} title='Deshacer'>
                 <Undo size={18} />
-            </button>
-
-            <button onClick={() => editor.chain().focus().redo().run()} disabled={!editor.can().redo()} title='Rehacer'>
+            </ToolbarButton>
+            <ToolbarButton onClick={() => editor.chain().focus().redo().run()} title='Rehacer'>
                 <Redo size={18} />
-            </button>
+            </ToolbarButton>
         </div>
     )
 }

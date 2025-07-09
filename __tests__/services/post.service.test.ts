@@ -1,6 +1,7 @@
 import { postService } from '@/services/post.service'
 import { PostModel } from '@/database/models/post.model'
 import { connectToMongoDB } from '@/database/mongo'
+import { Post } from '@/interfaces/post.interface'
 
 // Mockeamos las dependencias externas (base de datos)
 jest.mock('@/database/mongo', () => ({
@@ -19,7 +20,7 @@ describe('Post Service', () => {
             title: 'Test Title',
             content: 'Test Content',
             user: 'test-user-id',
-        }
+        } as Post
 
         // Configuramos el mock para que la función `create` del modelo devuelva el post creado
         const mockedCreate = PostModel.create as jest.Mock

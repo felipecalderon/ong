@@ -18,11 +18,11 @@ export default function AuthButton() {
                         width={40}
                         height={40}
                     />
-                    <button
+                    {/* <button
                         onClick={() => signOut()}
                         className='bg-red-500 text-white px-4 py-2 rounded-lg shadow-md transition-all hover:bg-red-600 focus:ring-2 focus:ring-red-400'>
                         Cerrar sesión
-                    </button>
+                    </button> */}
                 </div>
             ) : (
                 // Si no está autenticado, mostramos el botón de login

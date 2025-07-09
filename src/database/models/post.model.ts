@@ -20,4 +20,5 @@ export const PostSchema = new mongoose.Schema({
     },
 })
 
+PostSchema.set('timestamps', true)
 export const PostModel: Model<Post> = mongoose.models?.Post ?? mongoose.model<Post>('Post', PostSchema)

@@ -22,4 +22,4 @@ export const UserSchema = new mongoose.Schema({
     },
 })
 
-export const UserModel: Model<Omit<User, '_id'>> = mongoose.models?.User ?? mongoose.model<User>('User', UserSchema)
+export const UserModel: Model<User> = mongoose.models?.User ?? mongoose.model<User>('User', UserSchema)
