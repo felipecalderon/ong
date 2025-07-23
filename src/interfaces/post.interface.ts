@@ -6,3 +6,5 @@ export interface Post {
     createdAt: string
     upadtedAt: string
 }
+
+export type PostBeforeCreated = Pick<Post, 'title' | 'content' | 'user'>

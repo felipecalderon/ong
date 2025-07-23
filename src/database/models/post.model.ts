@@ -2,10 +2,6 @@ import { Post } from '@/interfaces/post.interface'
 import mongoose, { Model } from 'mongoose'
 
 export const PostSchema = new mongoose.Schema({
-    _id: {
-        type: String,
-        required: true,
-    },
     title: {
         type: String,
         required: true,

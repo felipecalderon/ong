@@ -59,8 +59,10 @@ const handler = NextAuth({
         async session({ session, token }) {
             // 3. Pasar los datos enriquecidos del token a la sesión del cliente
             if (token) {
-                session.user!.image = token.picture as string
-                session.user!.name = token.name as string
+                session.user.id = token.id as string
+                session.user.image = token.picture as string
+                session.user.name = token.name as string
+                session.user.email = token.email as string
             }
             return session
         },

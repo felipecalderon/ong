@@ -1,12 +1,10 @@
-import { savePost as savePostAction } from '@/actions/post.action'
-import { Post } from '@/interfaces/post.interface'
+import { Post, PostBeforeCreated } from '@/interfaces/post.interface'
 import { create } from 'zustand'
 
 interface PostStore {
-    post: Post
-    loading: boolean
-    setPost: (post: Post) => void
-    savePost: () => Promise<void>
+    post: PostBeforeCreated
+    setPost: (post: PostBeforeCreated) => void
+    isPostInvalid: () => string | null
 }
 
 export const usePostStore = create<PostStore>((set, get) => ({
@@ -15,18 +13,18 @@ export const usePostStore = create<PostStore>((set, get) => ({
         content: '',
         user: '',
     },
-    loading: false,
-    setPost: (post: Post) => set({ post }),
-    savePost: async () => {
-        try {
-            set({ loading: true })
-            const { post } = get()
-            await savePostAction(post)
-            console.log('Contenido guardado:', post)
-        } catch (error) {
-            console.error('Error al guardar post:', error)
-        } finally {
-            set({ loading: false })
+    setPost: (post) => set({ post }),
+    isPostInvalid: () => {
+        const { post } = get()
+        if (!post.title.trim()) {
+            return 'Debes ingresar un motivo de la denuncia'
         }
+        if (!post.content.trim()) {
+            return 'Redacta tu denuncia con detalle'
+        }
+        if (!post.user.trim()) {
+            return 'No has ingresado correctamente, reingresa'
+        }
+        return null
     },
 }))

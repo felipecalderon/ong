@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { HeroParallax } from '../ui/hero-parallax'
-import ReportButton from '../ui/report-button'
+import ReportButton from '../common/report-button'
 
 export function HeroParallaxDemo() {
     return (

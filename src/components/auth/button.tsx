@@ -17,6 +17,9 @@ export default function AuthButton() {
                         className='w-10 h-10 rounded-full border-2 border-gray-300 shadow-md'
                         width={40}
                         height={40}
+                        onClick={() => {
+                            signOut()
+                        }}
                     />
                     {/* <button
                         onClick={() => signOut()}

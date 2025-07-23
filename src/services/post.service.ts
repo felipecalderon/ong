@@ -1,20 +1,22 @@
 import { PostModel } from '@/database/models/post.model'
 import { connectToMongoDB } from '@/database/mongo'
-import { Post } from '@/interfaces/post.interface'
+import { Post, PostBeforeCreated } from '@/interfaces/post.interface'
 
 /**
  * Crea un nuevo post en la base de datos.
  * @param post - El objeto del post a guardar.
  * @returns El documento del post guardado.
  */
-const create = async (post: Post) => {
+const create = async (post: PostBeforeCreated): Promise<Post> => {
     await connectToMongoDB()
     const newPost = new PostModel({
         content: post.content,
         title: post.title,
         user: post.user,
     })
-    return await newPost.save()
+    const postDB = await newPost.save()
+    const strPost = JSON.stringify(postDB)
+    return JSON.parse(strPost)
 }
 
 /**

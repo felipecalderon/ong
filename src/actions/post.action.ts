@@ -1,7 +1,8 @@
+'use server'
 import { postService } from '@/services/post.service'
-import { Post } from '@/interfaces/post.interface'
+import { PostBeforeCreated } from '@/interfaces/post.interface'
 
-export async function savePost(post: Post) {
+export async function savePost(post: PostBeforeCreated) {
     return await postService.create(post)
 }
 
