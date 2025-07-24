@@ -23,10 +23,21 @@ const create = async (post: PostBeforeCreated): Promise<Post> => {
  * Obtiene todos los posts de la base de datos.
  * @returns Un array de posts.
  */
-const getAll = async () => {
+const getAll = async (userID?: string): Promise<Post[]> => {
     await connectToMongoDB()
-    const posts = await PostModel.find()
-    return posts
+    interface WherePostByID {
+        user?: string
+    }
+
+    let where: WherePostByID = {}
+
+    if (userID) {
+        where.user = userID
+    }
+    console.log(where)
+    const posts = await PostModel.find(where)
+    const strPost = JSON.stringify(posts)
+    return JSON.parse(strPost)
 }
 
 /**

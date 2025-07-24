@@ -6,8 +6,8 @@ export async function savePost(post: PostBeforeCreated) {
     return await postService.create(post)
 }
 
-export async function getPosts() {
-    return await postService.getAll()
+export async function getPosts(userID?: string) {
+    return await postService.getAll(userID)
 }
 
 export async function getPost(id: string) {

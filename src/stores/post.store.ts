@@ -1,4 +1,4 @@
-import { Post, PostBeforeCreated } from '@/interfaces/post.interface'
+import { PostBeforeCreated } from '@/interfaces/post.interface'
 import { create } from 'zustand'
 
 interface PostStore {
