@@ -30,7 +30,7 @@ export const MenuItem = ({ setActive, active, children }: { setActive: (item: bo
                 <FaLevelDownAlt />
             </motion.p>
             {active !== null && (
-                <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={transition}>
+                <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1, y: -15 }} transition={transition}>
                     {active && (
                         <div className='absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4'>
                             <motion.div

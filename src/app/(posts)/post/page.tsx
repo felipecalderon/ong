@@ -7,7 +7,7 @@ import { usePostStore } from '@/stores/post.store'
 
 export default function CreatePostPage() {
     // El estado ahora se maneja aquí, en el componente padre.
-    const { post, setPost, savePost, loading } = usePostStore()
+    const { post, setPost } = usePostStore()
 
     const handleContentChange = (newContent: string) => {
         setPost({ ...post, content: newContent })
@@ -33,21 +33,6 @@ export default function CreatePostPage() {
                         value={post.title}
                         onChange={handleTitleChange}
                     />
-                </div>
-
-                <div>
-                    <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>Descripción Detallada</label>
-                    <TiptapEditor
-                        value={post.content}
-                        onChange={handleContentChange}
-                        placeholder='Describe la situación con la mayor cantidad de detalles posibles: estado del animal, ubicación exacta, etc.'
-                    />
-                </div>
-
-                <div className='flex justify-end'>
-                    <Button onClick={savePost} disabled={loading}>
-                        {loading ? 'Enviando Denuncia...' : 'Enviar Denuncia'}
-                    </Button>
                 </div>
             </div>
         </main>
