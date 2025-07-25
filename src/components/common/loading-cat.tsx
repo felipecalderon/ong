@@ -1,5 +1,3 @@
-import { SpinningText } from '../magicui/spinning-text'
-
 export default function LoadingCat() {
     return (
         <div className='relative pointer-events-none z-50'>
