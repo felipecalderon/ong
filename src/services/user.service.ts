@@ -46,7 +46,7 @@ export class UserService {
     static async getByEmail(email?: string): Promise<User | null> {
         if (!email) return null
         await connectToMongoDB()
-        const findedUser = await UserModel.findOne({ email })
+        const findedUser = await UserModel.findOne({ email }).populate('posts')
         const jsonUser = findedUser?.toObject() ?? null
         return jsonUser as User | null
     }

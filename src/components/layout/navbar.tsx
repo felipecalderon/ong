@@ -1,16 +1,6 @@
 'use client'
 import { useState } from 'react'
-import {
-    MobileNav,
-    MobileNavHeader,
-    MobileNavMenu,
-    MobileNavToggle,
-    Navbar,
-    NavbarButton,
-    NavbarLogo,
-    NavBody,
-    NavItems,
-} from '../ui/resizable-navbar'
+import { MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle, Navbar, NavbarLogo, NavBody, NavItems } from '../ui/resizable-navbar'
 
 interface MenuNavbarProps {
     navItems: {
@@ -22,6 +12,7 @@ interface MenuNavbarProps {
 
 export default function MenuNavbar({ navItems, children }: MenuNavbarProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
     return (
         <Navbar>
             {/* Desktop Navigation */}

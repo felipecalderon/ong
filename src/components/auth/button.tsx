@@ -28,7 +28,7 @@ export default function AuthButton() {
                         <Menu setActive={setActive}>
                             <MenuItem setActive={setActive} active={active}>
                                 <div className='flex flex-col space-y-4 text-sm'>
-                                    <HoveredLink href='/dashboard'>Mis denuncias</HoveredLink>
+                                    <HoveredLink href={`/posts?userID=${session.user.id}`}>Mis denuncias</HoveredLink>
                                     <HoveredLink
                                         href='#'
                                         onClick={() => {

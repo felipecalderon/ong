@@ -4,7 +4,6 @@ import { IoClose, IoMenu } from 'react-icons/io5'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react'
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
-import Image from 'next/image'
 
 interface NavbarProps {
     children: React.ReactNode

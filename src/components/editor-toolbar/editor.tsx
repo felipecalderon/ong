@@ -10,7 +10,7 @@ import { useEffect, useTransition } from 'react'
 import { savePost } from '@/actions/post.action'
 import { useSession } from 'next-auth/react'
 
-export default function Editor() {
+export default function Editor({ html }: { html?: string }) {
     const extensions = [TextStyleKit, StarterKit]
     const { setPost, post, isPostInvalid } = usePostStore()
     const [isLoading, startTransition] = useTransition()
@@ -19,10 +19,10 @@ export default function Editor() {
     const editor = useEditor({
         extensions: extensions,
         onUpdate: (props) => {
-            const html = props.editor.getHTML()
+            const postHtml = html ?? props.editor.getHTML()
             setPost({
                 ...post,
-                content: html,
+                content: postHtml,
             })
         },
         immediatelyRender: false,
