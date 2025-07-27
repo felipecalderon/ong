@@ -1,19 +1,15 @@
 import { PostModel } from '@/database/models/post.model'
 import { connectToMongoDB } from '@/database/mongo'
-import { Post, PostBeforeCreated } from '@/interfaces/post.interface'
+import { Post, NewPost } from '@/interfaces/post.interface'
 
 /**
  * Crea un nuevo post en la base de datos.
  * @param post - El objeto del post a guardar.
  * @returns El documento del post guardado.
  */
-const create = async (post: PostBeforeCreated): Promise<Post> => {
+const create = async (post: NewPost): Promise<Post> => {
     await connectToMongoDB()
-    const newPost = new PostModel({
-        content: post.content,
-        title: post.title,
-        user: post.user,
-    })
+    const newPost = new PostModel(post)
     const postDB = await newPost.save()
     const strPost = JSON.stringify(postDB)
     return JSON.parse(strPost)
@@ -36,6 +32,8 @@ const getAll = async (userID?: string): Promise<Post[]> => {
     }
     console.log(where)
     const posts = await PostModel.find(where)
+        .populate('user', ['name', 'email', 'image'])
+        .populate('comments.user', ['name', 'email', 'image'])
     const strPost = JSON.stringify(posts)
     return JSON.parse(strPost)
 }
@@ -48,6 +46,8 @@ const getAll = async (userID?: string): Promise<Post[]> => {
 const getById = async (id: string) => {
     await connectToMongoDB()
     const post = await PostModel.findById(id)
+        .populate('user', ['name', 'email', 'image'])
+        .populate('comments.user', ['name', 'email', 'image'])
     return post
 }
 

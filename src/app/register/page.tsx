@@ -3,6 +3,7 @@
 import { useEffect, useState, useTransition } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { registerUser } from '@/actions/user.action' // Importamos la Server Action
+import { User } from '@/interfaces/user.interface'
 
 export default function RegisterPage() {
     const [isPending, startTransition] = useTransition()
@@ -12,11 +13,13 @@ export default function RegisterPage() {
     const email = params.get('email')
     const image = params.get('image')
 
-    const [user, setUser] = useState({
+    const [user, setUser] = useState<Omit<User, '_id'>>({
         name: '',
         email: '',
         password: '',
         image: '',
+        createdAt: '',
+        updatedAt: '',
     })
 
     const [error, setError] = useState('')

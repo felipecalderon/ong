@@ -1,9 +1,9 @@
-import { PostBeforeCreated } from '@/interfaces/post.interface'
+import { NewPost } from '@/interfaces/post.interface'
 import { create } from 'zustand'
 
 interface PostStore {
-    post: PostBeforeCreated
-    setPost: (post: PostBeforeCreated) => void
+    post: NewPost
+    setPost: (post: NewPost) => void
     isPostInvalid: () => string | null
 }
 
@@ -12,6 +12,11 @@ export const usePostStore = create<PostStore>((set, get) => ({
         title: '',
         content: '',
         user: '',
+        categories: [],
+        postType: 'denuncia',
+        evidence: [],
+        location: 'algun lugar..',
+        status: 'pendiente',
     },
     setPost: (post) => set({ post }),
     isPostInvalid: () => {
@@ -21,9 +26,6 @@ export const usePostStore = create<PostStore>((set, get) => ({
         }
         if (!post.content.trim()) {
             return 'Redacta tu denuncia con detalle'
-        }
-        if (!post.user.trim()) {
-            return 'No has ingresado correctamente, reingresa'
         }
         return null
     },

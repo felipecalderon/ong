@@ -20,6 +20,12 @@ export const UserSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    posts: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Post',
+        },
+    ],
 })
 
 export const UserModel: Model<User> = mongoose.models?.User ?? mongoose.model<User>('User', UserSchema)
