@@ -6,7 +6,6 @@ import { Vision } from '@/components/landing/vision'
 import { WhenToReport } from '@/components/landing/when-to-report'
 
 export default async function Home() {
-    // await sleep(5000)
     return (
         <div className='grid items-center justify-items-center gap-16 font-[family-name:var(--font-geist-sans)]'>
             <HeroParallaxDemo />
@@ -20,5 +19,3 @@ export default async function Home() {
         </div>
     )
 }
-
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))

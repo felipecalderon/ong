@@ -12,6 +12,18 @@ export const navItems = [
         link: '/donaciones',
     },
     {
+        name: 'Noticias',
+        link: '/publicaciones/noticias',
+    },
+    {
+        name: 'Denuncias',
+        link: '/publicaciones/denuncias',
+    },
+    {
+        name: 'Recomendaciones',
+        link: '/publicaciones/recomendaciones',
+    },
+    {
         name: 'Información',
         link: '/informacion',
     },

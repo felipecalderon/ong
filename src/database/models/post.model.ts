@@ -1,29 +1,8 @@
 import mongoose, { Model, Schema } from 'mongoose'
 import { Post } from '@/interfaces/post.interface'
+import { CommentSchema } from './comment.model'
 
-// Definimos el esquema de comentarios primero
-const CommentSchema = new Schema(
-    {
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-            required: true,
-        },
-        content: {
-            type: String,
-            required: true,
-        },
-        // La clave para los comentarios anidados
-        parentComment: {
-            type: Schema.Types.ObjectId,
-            ref: 'Comment', // Se refiere a otro comentario dentro del mismo post
-            required: false, // No es requerido, ya que los comentarios de nivel superior no tienen padre
-        },
-    },
-    { timestamps: true }
-)
-
-// Ahora definimos el esquema principal del Post
+// esquema principal del Post
 const PostSchema = new Schema<Post>(
     {
         postType: {
@@ -65,8 +44,11 @@ const PostSchema = new Schema<Post>(
             },
         },
         evidence: {
-            type: [String], // Array de URLs a las imágenes/videos
+            type: [String],
             default: [],
+            required: function () {
+                return this.postType === 'denuncia'
+            },
         },
         comments: [CommentSchema],
     },
