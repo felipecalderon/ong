@@ -47,6 +47,6 @@ export interface GeneralPost extends BasePost {
 export type Post = ComplaintPost | GeneralPost
 
 // Tipo para crear un nuevo post
-export type NewPost =
-    | Omit<GeneralPost, '_id' | 'createdAt' | 'updatedAt' | 'comments'>
-    | Omit<ComplaintPost, '_id' | 'createdAt' | 'updatedAt' | 'comments'>
+export type newGeneralPost = Omit<GeneralPost, '_id' | 'createdAt' | 'updatedAt' | 'comments'>
+export type newComplainPost = Omit<ComplaintPost, '_id' | 'createdAt' | 'updatedAt' | 'comments'>
+export type NewPost = newGeneralPost | newComplainPost

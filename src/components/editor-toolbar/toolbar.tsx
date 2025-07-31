@@ -11,7 +11,6 @@ import { IoArrowRedoSharp, IoArrowUndoCircleSharp, IoArrowUndoSharp } from 'reac
 import React from 'react'
 
 export const ToolBar = ({ editor }: { editor: Editor }) => {
-    // Read the current editor's state, and re-render the component when it changes
     const editorState = useEditorState({
         editor,
         selector: (ctx) => {
@@ -55,13 +54,15 @@ export const ToolBar = ({ editor }: { editor: Editor }) => {
                 <button
                     onClick={() => editor.chain().focus().toggleItalic().run()}
                     disabled={!editorState.canItalic}
-                    className={editorState.isItalic ? 'is-active' : ''}>
+                    className={editorState.isItalic ? 'is-active' : ''}
+                    title='Cursiva'>
                     <FaItalic className='text-xl' />
                 </button>
                 <button
                     onClick={() => editor.chain().focus().toggleStrike().run()}
                     disabled={!editorState.canStrike}
-                    className={editorState.isStrike ? 'is-active' : ''}>
+                    className={editorState.isStrike ? 'is-active' : ''}
+                    title='Tachado'>
                     <FaStrikethrough className='text-xl' />
                 </button>
                 <button onClick={() => editor.chain().focus().unsetAllMarks().run()} title='Borrar formato'>
@@ -70,16 +71,25 @@ export const ToolBar = ({ editor }: { editor: Editor }) => {
                 <button
                     onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
                     className={editorState.isHeading1 ? 'is-active' : ''}
-                    title='Título'>
+                    title='Encabezado'>
                     <span className='font-bold text-2xl'>T</span>
                 </button>
-                <button onClick={() => editor.chain().focus().toggleBulletList().run()} className={editorState.isBulletList ? 'is-active' : ''}>
+                <button
+                    onClick={() => editor.chain().focus().toggleBulletList().run()}
+                    className={editorState.isBulletList ? 'is-active' : ''}
+                    title='Lista de viñetas'>
                     <FaList className='text-xl' />
                 </button>
-                <button onClick={() => editor.chain().focus().toggleOrderedList().run()} className={editorState.isOrderedList ? 'is-active' : ''}>
+                <button
+                    onClick={() => editor.chain().focus().toggleOrderedList().run()}
+                    className={editorState.isOrderedList ? 'is-active' : ''}
+                    title='Lista numerada'>
                     <FaListOl className='text-xl' />
                 </button>
-                <button onClick={() => editor.chain().focus().toggleCodeBlock().run()} className={editorState.isCodeBlock ? 'is-active' : ''}>
+                <button
+                    onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+                    className={editorState.isCodeBlock ? 'is-active' : ''}
+                    title='Bloque de código'>
                     <FaCode className='text-xl' />
                 </button>
                 <button onClick={() => editor.chain().focus().undo().run()} disabled={!editorState.canUndo} title='Deshacer'>
