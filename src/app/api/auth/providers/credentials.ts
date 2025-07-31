@@ -11,6 +11,9 @@ export default CredentialsProvider({
     async authorize(credentials) {
         // 1. Buscar el usuario en la base de datos
         const user = await getUser(credentials?.email)
+        if (!user?.password) {
+            throw new Error('Usuario no encontrado')
+        }
         if (!user) {
             throw new Error('Usuario no encontrado')
         }
