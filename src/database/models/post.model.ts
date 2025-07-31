@@ -1,6 +1,7 @@
 import mongoose, { Model, Schema } from 'mongoose'
 import { Post } from '@/interfaces/post.interface'
 import { CommentSchema } from './comment.model'
+import './user.model' // Import for side effect to ensure user schema is registered
 
 // esquema principal del Post
 const PostSchema = new Schema<Post>(
