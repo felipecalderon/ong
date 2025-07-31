@@ -6,12 +6,12 @@ Palabras clave importantes en este dominio incluyen: "denuncia", "maltrato anima
 
 ## Tech Stack
 
-El proyecto utiliza las siguientes tecnologías:
+El proyecto utiliza las siguientes tecnologías (Monolito de Nextjs):
 
 -   **Frontend:** Next.js (App Router), React, TypeScript, Tailwind CSS, Shadcn/UI, Zustand (gestión de estado).
 -   **Backend:** Next.js (Server Actions, API Routes), Node.js, Mongoose.
 -   **Base de Datos:** MongoDB.
--   **Autenticación:** NextAuth.js.
+-   **Autenticación:** NextAuth.js.cv
 
 Prioriza soluciones y ejemplos de código que sean nativos o compatibles con este stack.
 
@@ -22,7 +22,8 @@ La estructura principal del proyecto es:
 ├───actions/ # Lógica de servidor (Server Actions)
 ├───app/ # Rutas, páginas, layouts (App Router)
 │ ├───api/ # Rutas de API
-│ └───(posts)/ # Gestión de posts/denuncias
+│ ├───posts/ # Gestión de posts/denuncias
+│ └───perfil/ # Gestión de información personal
 ├───components/ # Componentes React (UI y personalizados)
 │ └───ui/ # Componentes base de Shadcn/UI
 ├───database/ # Conexión DB y modelos Mongoose
@@ -38,7 +39,7 @@ Cuando se te pida crear nuevos archivos o componentes, considera esta estructura
 ## Estándares de Código
 
 -   Utiliza TypeScript estrictamente, define interfaces explícitamente para los datos.
--   Sigue las convenciones de nombres de Next.js para rutas y archivos.
+-   Sigue las convenciones de nombres de Next.js versión 15 para rutas y archivos.
 -   Preferencia por React Server Components y Server Actions para lógica de backend.
 -   Los componentes de UI deben seguir la convención de Shadcn/UI y ser lo más reusables posible.
 -   Usa camelCase para variables y funciones, PascalCase para componentes y tipos.
@@ -46,14 +47,12 @@ Cuando se te pida crear nuevos archivos o componentes, considera esta estructura
 
 ## Directrices para Gemini
 
--   Sé conciso y directo en tus respuestas.
--   Proporciona ejemplos de código completos cuando sea relevante.
--   Si te pido refactorizar, explica brevemente el porqué de los cambios.
+-   Conciso y directo en las respuestas.
+-   Al refactorizar, explica brevemente el porqué de los cambios.
 -   Siempre valida las soluciones con la estructura del proyecto y el tech stack definidos.
--   Cuando sugieras código, asume que estoy en un entorno de Next.js con TypeScript.
 
 ## Patrones Comunes
 
 -   Para la persistencia de datos, siempre interactúa a través de modelos de Mongoose definidos en `src/database/models`.
 -   Las acciones de usuario que modifiquen datos deben implementarse como Next.js Server Actions.
--   La autenticación se maneja exclusivamente con NextAuth.js. Si se requiere proteger una ruta, usa `getServerSession` o `useSession`.
+-   La autenticación se maneja exclusivamente con NextAuth.js. Si se requiere proteger una ruta, usa `useSession`.
