@@ -7,7 +7,7 @@ export function HeroParallaxDemo() {
     return (
         <HeroParallax images={images}>
             <div className='absolute w-full left-0 top-40 z-50 flex flex-col items-center justify-center gap-10'>
-                <h1 className='text-3xl md:text-6xl font-bold text-center mb-6 bg-gradient-to-r from-amber-600 to-amber-700 text-transparent bg-clip-text'>
+                <h1 className='text-3xl md:text-6xl font-bold text-center mb-6 bg-gradient-to-r from-orange-600 via-amber-500 to-cyan-700 text-transparent bg-clip-text'>
                     Protegemos vidas, <br /> Defendemos Derechos
                 </h1>
                 <p className='max-w-sm md:max-w-2xl text-base md:text-xl text-center pb-3 text-balance'>

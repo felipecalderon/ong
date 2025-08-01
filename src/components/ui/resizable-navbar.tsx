@@ -4,6 +4,7 @@ import { IoClose, IoMenu } from 'react-icons/io5'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react'
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
+import Image from 'next/image'
 
 interface NavbarProps {
     children: React.ReactNode
@@ -187,8 +188,7 @@ export const MobileNavToggle = ({ isOpen, onClick }: { isOpen: boolean; onClick:
 export const NavbarLogo = () => {
     return (
         <Link href='/' className='relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black'>
-            {/* <Image src='https://assets.aceternity.com/logo-dark.png' alt='logo' width={30} height={30} /> */}
-            <span className='font-medium text-black dark:text-white'>Startup</span>
+            <Image src='/logo-animalitus-v1.png' alt='Logo Animalitus ONG' width={120} height={40} />
         </Link>
     )
 }

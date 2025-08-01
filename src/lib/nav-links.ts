@@ -3,10 +3,10 @@ export const navItems = [
         name: 'Nosotros',
         link: '/nosotros',
     },
-    {
-        name: 'Adopciones',
-        link: '/adopciones',
-    },
+    // {
+    //     name: 'Adopciones',
+    //     link: '/adopciones',
+    // },
     {
         name: 'Donaciones',
         link: '/donaciones',
@@ -15,18 +15,18 @@ export const navItems = [
         name: 'Noticias',
         link: '/publicaciones/noticias',
     },
-    {
-        name: 'Denuncias',
-        link: '/publicaciones/denuncias',
-    },
-    {
-        name: 'Recomendaciones',
-        link: '/publicaciones/recomendaciones',
-    },
-    {
-        name: 'Información',
-        link: '/informacion',
-    },
+    // {
+    //     name: 'Denuncias',
+    //     link: '/publicaciones/denuncias',
+    // },
+    // {
+    //     name: 'Recomendaciones',
+    //     link: '/publicaciones/recomendaciones',
+    // },
+    // {
+    //     name: 'Información',
+    //     link: '/informacion',
+    // },
     {
         name: 'Contacto',
         link: '/contacto',
