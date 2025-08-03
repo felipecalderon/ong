@@ -7,7 +7,7 @@ import { WhenToReport } from '@/components/landing/when-to-report'
 
 export default async function Home() {
     return (
-        <div className='grid items-center justify-items-center gap-16 font-[family-name:var(--font-geist-sans)]'>
+        <div className='grid items-center justify-items-center gap-16'>
             <HeroParallaxDemo />
             <div className='flex flex-col md:flex-row gap-8'>
                 <Mission />

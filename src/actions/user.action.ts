@@ -1,12 +1,17 @@
 'use server'
 import { User } from '@/interfaces/user.interface'
 import { UserService } from '@/services/user.service'
+import { revalidatePath } from 'next/cache'
+
+// Tipos
+type UpdateUserInput = Partial<Pick<User, 'name' | 'email'>>
+type FormState = {
+    success: boolean
+    message: string
+}
 
 /**
  * Server Action para registrar un nuevo usuario.
- * Invoca a UserService para manejar la lógica de negocio.
- * @param user - Datos del usuario desde el formulario.
- * @returns El usuario creado o un mensaje de error.
  */
 export const registerUser = async (user: Omit<User, '_id'>) => {
     try {
@@ -25,25 +30,44 @@ export const registerUser = async (user: Omit<User, '_id'>) => {
 
 /**
  * Server Action para obtener un usuario por su email.
- * Invoca a UserService para manejar la lógica de negocio.
- * @param email - El email del usuario a buscar.
- * @returns El usuario encontrado o null.
  */
 export const getUser = async (email?: string): Promise<User | null> => {
-    // Para la obtención de datos (queries), a menudo se puede llamar directamente
-    // al servicio sin un manejo de errores tan complejo como en las mutaciones.
     return await UserService.getByEmail(email)
 }
 
 /**
+ * Server Action para actualizar la información de un usuario.
+ */
+export const updateUser = async (userId: string, currentState: FormState, formData: FormData): Promise<FormState> => {
+    try {
+        const data: UpdateUserInput = {
+            name: formData.get('name') as string,
+            email: formData.get('email') as string,
+        }
+
+        await UserService.update(userId, data)
+
+        revalidatePath('/perfil') // Invalida la caché de la página de perfil
+
+        return {
+            success: true,
+            message: '¡Perfil actualizado con éxito!',
+        }
+    } catch (error) {
+        return {
+            success: false,
+            message: error instanceof Error ? error.message : 'No se pudo actualizar el perfil.',
+        }
+    }
+}
+
+/**
  * Server Action para actualizar la imagen de perfil de un usuario.
- * @param userEmail - El correo del usuario.
- * @param newBase64Image - La nueva imagen en formato base64.
- * @returns Un objeto con el resultado de la operación.
  */
 export const updateUserImage = async (userEmail: string, newBase64Image: string) => {
     try {
         const updatedUser = await UserService.updateProfileImage(userEmail, newBase64Image)
+        revalidatePath('/perfil')
         return {
             success: true,
             data: updatedUser,

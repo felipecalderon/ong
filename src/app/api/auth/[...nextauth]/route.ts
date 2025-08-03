@@ -1,10 +1,9 @@
-import NextAuth, { User } from 'next-auth'
-import { JWT } from 'next-auth/jwt'
+import NextAuth, { NextAuthOptions, User } from 'next-auth'
 import CredentialsProvider from '@/app/api/auth/providers/credentials'
 import { Google } from '@/app/api/auth/providers/social'
 import { getUser } from '@/actions/user.action'
 
-const handler = NextAuth({
+export const config = {
     providers: [CredentialsProvider, Google],
     pages: {
         signIn: '/login',
@@ -71,6 +70,8 @@ const handler = NextAuth({
             return url.startsWith(baseUrl) ? url : baseUrl
         },
     },
-})
+} satisfies NextAuthOptions
+
+const handler = NextAuth(config)
 
 export { handler as GET, handler as POST }

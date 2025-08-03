@@ -47,8 +47,24 @@ export class UserService {
         if (!email) return null
         await connectToMongoDB()
         const findedUser = await UserModel.findOne({ email }).populate('posts')
-        const jsonUser = findedUser?.toObject() ?? null
-        return jsonUser as User | null
+        const jsonUser = JSON.stringify(findedUser)
+
+        return JSON.parse(jsonUser) as User | null
+    }
+
+    /**
+     * Actualiza la información de un usuario (nombre, email).
+     * @param userId - El ID del usuario a actualizar.
+     * @param data - Los datos a actualizar.
+     * @returns El usuario actualizado.
+     */
+    static async update(userId: string, data: Partial<Pick<User, 'name' | 'email'>>): Promise<User | null> {
+        await connectToMongoDB()
+        const updatedUser = await UserModel.findByIdAndUpdate(userId, data, { new: true })
+        if (!updatedUser) {
+            throw new Error('Usuario no encontrado.')
+        }
+        return updatedUser.toObject() as User | null
     }
 
     /**

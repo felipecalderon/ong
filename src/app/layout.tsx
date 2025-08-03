@@ -1,20 +1,26 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import './globals.css'
+import { Geist, Geist_Mono, Poetsen_One } from 'next/font/google'
 import AuthProvider from '@/providers/auth'
 import Navbar from '@/components/layout/navbar'
-import { Toaster } from 'sonner'
 import CatAnimated from '@/components/common/cat-animated'
 import AuthButton from '@/components/auth/button'
 import { navItems } from '@/lib/nav-links'
+import { Toaster } from 'sonner'
+import './globals.css'
+
+const poetsen = Poetsen_One({
+    variable: '--poetsen',
+    weight: '400',
+    subsets: ['latin'],
+})
 
 const geistSans = Geist({
-    variable: '--font-geist-sans',
+    variable: '--geist-sans',
     subsets: ['latin'],
 })
 
 const geistMono = Geist_Mono({
-    variable: '--font-geist-mono',
+    variable: '--geist-mono',
     subsets: ['latin'],
 })
 
@@ -30,7 +36,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='es'>
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+            <body className={`${geistSans.variable} ${geistMono.variable} ${poetsen.variable} font-[family-name:var(--geist-sans)] antialiased`}>
                 <AuthProvider>
                     <Toaster />
                     <Navbar navItems={navItems}>
