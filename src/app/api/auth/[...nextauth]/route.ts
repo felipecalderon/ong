@@ -1,5 +1,6 @@
-import '@/models/user.model'
-import '@/models/post.model'
+import '@/database/models/user.model'
+import '@/database/models/post.model'
+
 import NextAuth from 'next-auth'
 import { config } from './configAuth'
 
