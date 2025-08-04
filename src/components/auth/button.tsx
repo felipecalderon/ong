@@ -9,26 +9,18 @@ import { HoveredLink, Menu, MenuItem } from '../ui/dropdown-menu'
 export default function AuthButton() {
     const { data: session } = useSession()
     const [active, setActive] = useState<boolean>(false)
-    const [isVisibleDropdown, setIsVisibleDd] = useState<boolean>(false)
 
     return (
         <div className='flex items-center justify-center'>
             {session ? (
                 // Si el usuario está autenticado, mostramos su avatar y el botón de logout
-                <div
-                    className='flex items-center gap-4'
-                    onMouseEnter={() => {
-                        setIsVisibleDd(true)
-                    }}
-                    onMouseLeave={() => {
-                        setIsVisibleDd(false)
-                    }}>
+                <div className='flex items-center gap-4'>
                     <AnimatedAvatar user={session.user} />
                     <motion.div transition={{ duration: 0.3 }} whileHover={{ opacity: 1, scale: 1.1 }} initial={{ opacity: 0.7 }}>
                         <Menu setActive={setActive}>
                             <MenuItem setActive={setActive} active={active}>
                                 <div className='flex flex-col space-y-4 text-sm'>
-                                    <HoveredLink href={`/posts?userID=${session.user.id}`}>Mis denuncias</HoveredLink>
+                                    <HoveredLink href={`/perfil`}>Mi Perfil</HoveredLink>
                                     <HoveredLink
                                         href='#'
                                         onClick={() => {

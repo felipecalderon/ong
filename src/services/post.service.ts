@@ -58,3 +58,12 @@ export const getPostById = async (id: string) => {
     const post = await PostModel.findById(id).populate('user', ['name', 'email', 'image']).populate('comments.user', ['name', 'email', 'image'])
     return post
 }
+
+/**
+ * Elimina un post por su ID.
+ * @param id - El ID del post a eliminar.
+ */
+export const deletePost = async (id: string): Promise<void> => {
+    await connectToMongoDB()
+    await PostModel.findByIdAndDelete(id)
+}

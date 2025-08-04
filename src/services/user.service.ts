@@ -64,7 +64,8 @@ export class UserService {
         if (!updatedUser) {
             throw new Error('Usuario no encontrado.')
         }
-        return updatedUser.toObject() as User | null
+        const jsonUser = JSON.stringify(updatedUser)
+        return JSON.parse(jsonUser) as User | null
     }
 
     /**

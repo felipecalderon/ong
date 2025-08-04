@@ -1,7 +1,8 @@
 'use client'
 
 import { useActionState, useEffect } from 'react'
-import { useFormState, useFormStatus } from 'react-dom'
+import { useFormStatus } from 'react-dom'
+import { useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 import { User } from '@/interfaces/user.interface'
 import { updateUser } from '@/actions/user.action'
@@ -16,6 +17,7 @@ interface ProfileFormProps {
 const initialState = {
     success: false,
     message: '',
+    data: null,
 }
 
 function SubmitButton() {
@@ -28,24 +30,30 @@ function SubmitButton() {
 }
 
 export function ProfileForm({ user }: ProfileFormProps) {
-    const updateUserWithId = updateUser.bind(null, user._id)
-    const [state, formAction] = useActionState(updateUserWithId, initialState)
+    const { update } = useSession()
+    const [state, formAction] = useActionState(updateUser, initialState)
 
     useEffect(() => {
         if (state.message) {
-            state.success ? toast.success(state.message) : toast.error(state.message)
+            if (state.success) {
+                toast.success(state.message)
+                update({ user: state.data })
+            } else {
+                toast.error(state.message)
+            }
         }
     }, [state])
 
     return (
         <form action={formAction} className='space-y-6'>
+            <input type='hidden' name='userId' value={user._id} />
             <div className='space-y-2'>
                 <Label htmlFor='name'>Nombre</Label>
-                <Input id='name' name='name' defaultValue={user.name} required />
+                <Input id='name' name='name' defaultValue={user.name} maxLength={30} required />
             </div>
             <div className='space-y-2'>
                 <Label htmlFor='email'>Correo Electrónico</Label>
-                <Input id='email' name='email' type='email' defaultValue={user.email} required />
+                <Input id='email' name='email' type='email' defaultValue={user.email} readOnly className='cursor-not-allowed bg-gray-100' />
             </div>
             <SubmitButton />
         </form>
