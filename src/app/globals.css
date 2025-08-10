@@ -77,6 +77,20 @@ h4,
 h5 {
     font-family: var(--poetsen);
 }
+
+h3 {
+    @apply text-amber-500;
+}
+
+::selection {
+    @apply bg-amber-200;
+    @apply text-amber-800;
+}
+
+::-moz-selection {
+    @apply bg-amber-200;
+    @apply text-amber-800;
+}
 /* Custom properties */
 :root {
     /* colors */

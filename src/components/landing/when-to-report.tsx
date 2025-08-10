@@ -11,15 +11,15 @@ const situations = [
 
 export const WhenToReport: () => React.JSX.Element = () => {
     return (
-        <section className='py-12 md:py-24 bg-teal-100'>
-            <div className='container mx-auto px-4'>
+        <section className='w-full py-16 sm:py-20 lg:py-24 bg-gray-50 dark:bg-gray-900'>
+            <div className='container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl'>
                 <h2 className='text-4xl font-bold text-center mb-12 bg-gradient-to-r from-orange-600 via-amber-500 to-cyan-700 text-transparent bg-clip-text'>
                     ¿Cuándo hacer una denuncia?
                 </h2>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
                     {situations.map((situation, index) => (
-                        <div key={index} className='p-6 border border-gray-200 rounded-lg shadow-sm bg-teal-200'>
-                            <p className='text-gray-600'>{situation}</p>
+                        <div key={index} className='p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm'>
+                            <p className='text-gray-700 dark:text-gray-300'>{situation}</p>
                         </div>
                     ))}
                 </div>

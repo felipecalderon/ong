@@ -29,16 +29,16 @@ const values = [
 
 export const Values = () => {
     return (
-        <section className='py-12 md:py-24 max-w-6xl'>
-            <div className='container mx-auto px-4'>
+        <section className='w-full py-16 sm:py-20 lg:py-24'>
+            <div className='container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl'>
                 <h2 className='text-4xl font-bold text-center mb-12 bg-gradient-to-r from-orange-600 via-amber-500 to-cyan-700 text-transparent bg-clip-text'>
                     Nuestros Valores
                 </h2>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
                     {values.map((value) => (
-                        <div key={value.title} className='p-6 border border-gray-200 rounded-lg shadow-sm'>
-                            <h3 className='text-xl font-semibold mb-2'>{value.title}</h3>
-                            <p className='text-gray-600'>{value.description}</p>
+                        <div key={value.title} className='p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm'>
+                            <h3 className='text-xl font-semibold mb-2 text-gray-900 dark:text-white'>{value.title}</h3>
+                            <p className='text-gray-600 dark:text-gray-300'>{value.description}</p>
                         </div>
                     ))}
                 </div>
