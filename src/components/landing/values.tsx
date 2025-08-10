@@ -29,7 +29,7 @@ const values = [
 
 export const Values = () => {
     return (
-        <section className='py-12 md:py-24'>
+        <section className='py-12 md:py-24 max-w-6xl'>
             <div className='container mx-auto px-4'>
                 <h2 className='text-4xl font-bold text-center mb-12 bg-gradient-to-r from-orange-600 via-amber-500 to-cyan-700 text-transparent bg-clip-text'>
                     Nuestros Valores

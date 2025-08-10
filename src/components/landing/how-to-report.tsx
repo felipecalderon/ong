@@ -15,14 +15,14 @@ const steps = [
         description: 'Acude a la fiscalía más cercana o a un juzgado de policía local para formalizar la denuncia.',
     },
     {
-        title: 'Contacta a una ONG',
+        title: 'Contáctanos',
         description: 'Si necesitas asesoría legal, no dudes en contactarnos a través de nuestro formulario de denuncia.',
     },
 ]
 
 export const HowToReport = () => {
     return (
-        <section className='py-12 md:py-24'>
+        <section className='py-12 md:py-24 max-w-6xl'>
             <div className='container mx-auto px-4'>
                 <h2 className='text-4xl font-bold text-center mb-12 bg-gradient-to-r from-orange-600 via-amber-500 to-cyan-700 text-transparent bg-clip-text'>
                     ¿Cómo Denunciar?

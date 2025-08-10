@@ -7,8 +7,8 @@ export const Vision = () => {
                 Nuestra Visión
             </h2>
             <p className='text-lg text-center text-gray-700 max-w-md'>
-                "Ser la organización líder en la defensa jurídica de los animales en Chile, transformando la sociedad hacia un modelo donde el respeto
-                a la vida animal sea un pilar fundamental del sistema legal y cultural."
+                Queremos ser la organización líder en la defensa jurídica de los animales en Chile, transformando la sociedad hacia un modelo donde el
+                respeto a la vida animal sea un pilar fundamental del sistema legal y cultural.
             </p>
         </div>
     )

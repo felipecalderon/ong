@@ -7,8 +7,8 @@ export const Mission = () => {
                 Nuestra Misión
             </h2>
             <p className='text-lg text-center text-gray-700 max-w-md'>
-                "Promover, educar y defender los derechos de los animales en Chile mediante herramientas legales, formación ciudadana y litigación
-                estratégica, asegurando justicia y bienestar para todas las especies."
+                Promover, educar y defender los derechos de los animales en Chile mediante herramientas legales, formación ciudadana y litigación
+                estratégica, asegurando justicia y bienestar para todas las especies.
             </p>
         </div>
     )

@@ -6,6 +6,7 @@ import NextImage from 'next/image'
 import { toast } from 'sonner'
 import { User } from '@/interfaces/user.interface'
 import { updateUserImageAction } from '@/actions/user.action'
+import { optimizeImg } from '@/utils/optimize-img'
 
 interface UpdateProfileImageProps {
     user: User
@@ -38,24 +39,11 @@ export function UpdateProfileImage({ user }: UpdateProfileImageProps) {
             img.src = originalBase64
 
             img.onload = () => {
-                const maxWidth = 800
-                const scaleRatio = maxWidth / img.width
-                const newWidth = img.width > maxWidth ? maxWidth : img.width
-                const newHeight = img.width > maxWidth ? img.height * scaleRatio : img.height
-
-                const canvas = document.createElement('canvas')
-                canvas.width = newWidth
-                canvas.height = newHeight
-
-                const ctx = canvas.getContext('2d')
-                ctx?.drawImage(img, 0, 0, newWidth, newHeight)
-
-                // Comprimir a JPEG con calidad del 75%
-                const resizedBase64 = canvas.toDataURL('image/jpeg', 0.75)
+                const newImg = optimizeImg(img)
 
                 const formData = new FormData()
                 formData.append('email', user.email)
-                formData.append('imageBase64', resizedBase64)
+                formData.append('imageBase64', newImg)
 
                 startTransition(() => {
                     formAction(formData)
