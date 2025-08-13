@@ -1,3 +1,5 @@
+import { HistoricalTimeline } from '@/components/common/historical-timeline'
+import { LegalProposalList } from '@/components/common/legal-proposal-list'
 import { HeroParallaxDemo } from '@/components/landing/hero'
 import { HowToReport } from '@/components/landing/how-to-report'
 import { Mission } from '@/components/landing/mission'
@@ -20,6 +22,16 @@ export default async function Home() {
             </section>
 
             <Values />
+
+            <section>
+                <h3 className='text-3xl font-bold text-center text-gray-800 dark:text-white mb-12'>Hitos Históricos en la Legislación Chilena</h3>
+                <HistoricalTimeline />
+            </section>
+
+            <section className='mb-24'>
+                <h3 className='text-3xl font-bold text-center text-gray-800 dark:text-white mb-12'>Propuestas y Debates Actuales</h3>
+                <LegalProposalList />
+            </section>
             <WhenToReport />
             <HowToReport />
         </main>
