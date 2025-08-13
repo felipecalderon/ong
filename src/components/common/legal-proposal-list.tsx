@@ -45,6 +45,14 @@ export function LegalProposalList() {
                     </Card>
                 ))}
             </div>
+            <p className='text-center text-balance text-gray-500 text-lg italic pt-20 max-w-4xl mx-auto'>
+                Te invitamos a mirar más allá de la forma y el instinto. En el ladrido emocionado de un reencuentro, en el ronroneo que busca calor o
+                en la mirada que expresa temor, justo ahí yace la sintiencia. Es la simple y a la vez extraordinaria verdad de que los{' '}
+                <strong>animales sienten</strong>. Su mundo interior es tan real y válido como el nuestro, lleno de emociones que van desde la alegría
+                más pura hasta el sufrimiento más hondo. <br />
+                ¿Qué significa para nosotros que ellos sientan? Significa que nuestras acciones tienen un eco en su existencia y que sus sentimientos
+                merecen, como mínimo, nuestro más profundo respeto.
+            </p>
         </div>
     )
 }

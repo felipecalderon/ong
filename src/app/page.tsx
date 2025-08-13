@@ -28,7 +28,7 @@ export default async function Home() {
                 <HistoricalTimeline />
             </section>
 
-            <section className='mb-24'>
+            <section className=''>
                 <h3 className='text-3xl font-bold text-center text-gray-800 dark:text-white mb-12'>Propuestas y Debates Actuales</h3>
                 <LegalProposalList />
             </section>
